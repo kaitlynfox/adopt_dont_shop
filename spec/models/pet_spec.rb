@@ -8,6 +8,8 @@ RSpec.describe Pet, type: :model do
   end
 
   describe 'validations' do
+    # https://guides.rubyonrails.org/active_record_validations.html
+    # :case_sensitive - will be case sensitive or not?
     it { should validate_presence_of(:name) }
     it { should validate_presence_of(:age) }
     it { should validate_numericality_of(:age) }
