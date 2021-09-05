@@ -30,7 +30,7 @@ RSpec.describe 'application' do
                                       state: "Arizona",
                                       zip_code: "12345",
                                       description: "I am great with animals.",
-                                      application_status: "Pending")
+                                      application_status: "In Progress")
 
     ApplicationPet.create!(pet: pet_1, application: tom_daniels)
     ApplicationPet.create!(pet: pet_2, application: tom_daniels)
@@ -41,8 +41,6 @@ RSpec.describe 'application' do
     expect(page).to have_content(tom_daniels.city)
     expect(page).to have_content(tom_daniels.state)
     expect(page).to have_content(tom_daniels.zip_code)
-    expect(page).to have_content(tom_daniels.description)
-    expect(page).to have_content(tom_daniels.application_status)
 
     expect(ApplicationPet.count).to eq(2)
     expect(tom_daniels.pets).to eq([pet_1, pet_2])
