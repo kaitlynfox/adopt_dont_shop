@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   get '/', to: 'application#welcome'
 
   get '/applications', to: 'application#index'
+  get 'applications/:id', to: 'application#show'
 
   get '/shelters', to: 'shelters#index'
   get '/shelters/new', to: 'shelters#new'
@@ -15,7 +16,7 @@ Rails.application.routes.draw do
   get '/pets/:id', to: 'pets#show'
   get '/pets/:id/edit', to: 'pets#edit'
   patch '/pets/:id', to: 'pets#update'
-  delete '/pets/:id', to: 'pets#destroy' 
+  delete '/pets/:id', to: 'pets#destroy'
 
   get '/veterinary_offices', to: 'veterinary_offices#index'
   get '/veterinary_offices/new', to: 'veterinary_offices#new'

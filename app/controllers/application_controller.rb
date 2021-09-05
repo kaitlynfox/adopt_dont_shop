@@ -3,7 +3,12 @@ class ApplicationController < ActionController::Base
   end
 
   def index
-    
+
+  end
+
+  def show
+    @application = Application.find(params[:id])
+    @pets = @application.pets
   end
 
   private

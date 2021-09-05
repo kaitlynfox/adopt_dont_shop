@@ -1,0 +1,14 @@
+<div class="application_and_attributes">
+  <h3>Name: </h3><%= @application.name %>
+  <h3>City: </h3><%= @application.city %>
+  <h3>State: </h3><%= @application.state %>
+  <h3>Zip Code: </h3><%= @application.zip_code %>
+  <h3>Description: </h3><%= @application.description %>
+  <h3>Application Status: </h3><%= @application.application_status %>
+</div>
+
+
+<h3>Current Pets with an Application</h3>
+<% @pets.each do |pet| %>
+  <p>Pet Name: <%= link_to pet.name, "/pets/#{pet.id}" %></p>
+<% end %>
