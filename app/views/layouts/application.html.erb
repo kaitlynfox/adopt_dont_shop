@@ -21,6 +21,11 @@
       <p><%= link_to "Veterinarians", "/veterinarians" %></p>
       <p><%= link_to "Veterinary Offices", "/veterinary_offices" %></p>
     </section>
+
+    <% flash.each do |type, message| %>
+      <p><b><%= message %></b></p>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>
