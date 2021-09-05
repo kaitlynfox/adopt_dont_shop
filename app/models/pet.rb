@@ -3,8 +3,10 @@ class Pet < ApplicationRecord
   validates :age, presence: true, numericality: true
 
   belongs_to :shelter
-  has_many :application_pets
-  has_many :applications, through: :application_pets
+  # Will want dependent: :destroy in order to destroy all applications
+  # when we remove a pet 
+  has_many :application_pets, dependent: :destroy
+  has_many :applications, through: :application_pets, dependent: :destroy
 
   def shelter_name
     shelter.name
