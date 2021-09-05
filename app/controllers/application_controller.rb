@@ -16,8 +16,15 @@ class ApplicationController < ActionController::Base
   end
 
   def create
-    applicant = Application.create!(application_params)
-    redirect_to "/applications/#{applicant.id}"
+    applicant = Application.new(application_params)
+    if applicant.save
+      redirect_to "/applications/#{applicant.id}"
+    else
+      flash[:notice] = "Application not created: Please fill in ALL required information."
+      render :new
+    end
+    # applicant = Application.create!(application_params)
+    # redirect_to "/applications/#{applicant.id}"
   end
 
   private
