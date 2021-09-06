@@ -5,8 +5,25 @@
   <h3>Zip Code: </h3><%= @application.zip_code %>
 </div>
 
-
 <h3>Current Pets with an Application</h3>
 <% @pets.each do |pet| %>
   <p>Pet Name: <%= link_to pet.name, "/pets/#{pet.id}" %></p>
+<% end %>
+
+<% if !@application.is_submitted? %>
+  <div class="add_a_pet_to_application">
+    <h3>Add a Pet to this Application</h3>
+  </div>
+
+  <%= form_with url: "/applications/#{@application.id}", method: :get, local: true do |f| %>
+    <%= f.label :search %>
+    <%= f.text_field :search %>
+    <%= f.submit "Submit" %>
+  <% end %>
+
+  <% if @pet_result != nil %>
+    <% @pet_result.each do |pet| %>
+      <p>Result: <%= pet.name %></p>
+    <% end %>
+  <% end %>
 <% end %>
