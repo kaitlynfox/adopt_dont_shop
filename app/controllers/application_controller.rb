@@ -33,7 +33,10 @@ class ApplicationController < ActionController::Base
   end
 
   def add_pet
-
+    # Store applicant id
+    applicant_id = params[:id]
+    ApplicationPet.create!(pet_id: params[:pet_id], application_id: params[:id])
+    redirect_to "/applications/#{applicant_id}"
   end
 
   private
