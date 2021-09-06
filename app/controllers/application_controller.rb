@@ -32,6 +32,10 @@ class ApplicationController < ActionController::Base
     # redirect_to "/applications/#{applicant.id}"
   end
 
+  def add_pet
+
+  end
+
   private
 
   def error_message(errors)
