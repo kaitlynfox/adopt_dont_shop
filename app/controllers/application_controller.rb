@@ -9,6 +9,11 @@ class ApplicationController < ActionController::Base
   def show
     @application = Application.find(params[:id])
     @pets = @application.pets
+
+    # Grab input entered into search by user and submitted
+    # Run through all Pets and find matches to that name
+    @pet_name = (params[:search])
+    @pet_result = Pet.where(name: @pet_name)
   end
 
   def new
