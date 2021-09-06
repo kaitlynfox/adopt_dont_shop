@@ -20,6 +20,18 @@ class ApplicationController < ActionController::Base
 
   end
 
+  def submit
+    # Change application status when the application is submitted
+    # Update description with user input
+    application = Application.find(params[:id])
+    application.update(description: params[:description], application_status: "Pending")
+
+    # Redirect back to the applications show page
+    redirect_to "/applications/#{application.id}"
+  end
+
+
+
   def create
     applicant = Application.new(application_params)
     if applicant.save
