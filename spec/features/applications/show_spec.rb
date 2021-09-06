@@ -51,4 +51,44 @@ RSpec.describe 'application' do
 
     expect(current_path).to eq("/pets/#{pet_1.id}")
   end
+
+  it "displays a section on the page called 'Add a Pet to this Application'" do
+
+    shelter = Shelter.create(name: 'Aurora shelter',
+                             city: 'Aurora, CO',
+                            foster_program: false,
+                            rank: 9)
+
+    pet_1 = Pet.create(adoptable: true,
+                       age: 1, breed: 'sphynx',
+                       name: 'Lucille Bald',
+                       shelter_id: shelter.id)
+
+    pet_2 = Pet.create(adoptable: true,
+                       age: 3, breed: 'doberman',
+                       name: 'Lobster',
+                       shelter_id: shelter.id)
+
+    tom_daniels = Application.create!(name: "Tom Daniels",
+                                      street_address: "123 Maple",
+                                      city: "Tucson",
+                                      state: "Arizona",
+                                      zip_code: "12345",
+                                      description: "I am great with animals.",
+                                      application_status: "In Progress")
+
+    # ApplicationPet.create!(pet: pet_1, application: tom_daniels)
+    # ApplicationPet.create!(pet: pet_2, application: tom_daniels)
+
+    visit "/applications/#{tom_daniels.id}"
+
+    expect(page).to have_content("Add a Pet to this Application")
+    expect(page).to have_button("Submit")
+
+
+    fill_in("search", with: "Hank")
+    click_button("Submit")
+
+    expect(current_path).to eq("/applications/#{tom_daniels.id}")
+  end
 end
