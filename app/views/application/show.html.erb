@@ -22,8 +22,13 @@
   <% end %>
 
   <% if @pet_result != nil %>
+   <p>Results</p>
     <% @pet_result.each do |pet| %>
-      <p>Result: <%= pet.name %></p>
+        <%= form_with url: "/applications/#{@application.id}", method: :patch, local: true do |f| %>
+          <%= f.label(:result, "#{pet.name}")%>
+          <%= f.hidden_field :pet_id, :value => pet.id %>
+          <%= f.submit "Adopt this Pet" %>
+        <% end %>
     <% end %>
   <% end %>
 <% end %>
