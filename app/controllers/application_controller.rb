@@ -11,9 +11,9 @@ class ApplicationController < ActionController::Base
     @pets = @application.pets
 
     # Grab input entered into search by user and submitted
-    # Run through all Pets and find matches to that name
+    # Run through all Pets and find matches to that name, even with partial
     @pet_name = (params[:search])
-    @pet_result = Pet.where(name: @pet_name)
+    @pet_result = Pet.where('name like ?', "%#{@pet_name}%")
   end
 
   def new
