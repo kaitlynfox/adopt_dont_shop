@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
     @pet_result = nil
 
     if @pet_name != nil
-      @pet_result = Pet.where('name like ?', "%#{@pet_name}%")
+      @pet_result = Pet.where('lower(name) like ?', "%#{@pet_name.downcase}%")
     end
   end
 
