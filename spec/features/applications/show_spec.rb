@@ -206,4 +206,37 @@ RSpec.describe 'application' do
 
     expect(page).to have_content(pet_2.name)
   end
+
+  it "can be case insensitive when searching for a pet's name" do
+
+    shelter = Shelter.create(name: 'Aurora shelter',
+                             city: 'Aurora, CO',
+                            foster_program: false,
+                            rank: 9)
+
+    pet_1 = Pet.create(adoptable: true,
+                       age: 1, breed: 'sphynx',
+                       name: 'Lucy',
+                       shelter_id: shelter.id)
+
+    tom_daniels = Application.create!(name: "Tom Daniels",
+                                      street_address: "123 Maple",
+                                      city: "Tucson",
+                                      state: "Arizona",
+                                      zip_code: "12345",
+                                      description: "I am great with animals.",
+                                      application_status: "In Progress")
+
+    visit "/applications/#{tom_daniels.id}"
+
+    expect(page).to have_button("Submit")
+
+    fill_in("search", with: 'lucy')
+    click_button("Submit")
+
+    expect(current_path).to eq("/applications/#{tom_daniels.id}")
+
+    expect(page).to have_content("Results")
+    expect(page).to have_text('Lucy')
+  end
 end
